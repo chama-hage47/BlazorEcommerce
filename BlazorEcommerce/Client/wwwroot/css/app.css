@@ -63,5 +63,14 @@ a, .btn-link {
         content: "An error has occurred."
     }
 .price {
-    color: green;
+    color: darkgreen;
+}
+
+.media {
+    display: flex;
+}
+
+.media-body 
+{
+    flex: 1;
 }

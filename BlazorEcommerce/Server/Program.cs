@@ -2,8 +2,7 @@ global using BlazorEcommerce.Shared;//this is needed for ProductController.cs
 global using Microsoft.AspNetCore.ResponseCompression;
 global using BlazorEcommerce.Server.Data;
 global using BlazorEcommerce.Server.Services.ProductService;
-using Microsoft.EntityFrameworkCore;
-using BlazorEcommerce.Server.Services.ProductService;
+global using Microsoft.EntityFrameworkCore;
 //using Microsoft.AspNetCore.ResponseCompression;
 
 namespace BlazorEcommerce

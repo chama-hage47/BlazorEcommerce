@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlazorEcommerce.Server.Controllers
- {
+{
 	[Route("api/[controller]")]//[Route("[controller]")]same meaning
 	[ApiController]
 	public class ProductController : ControllerBase
@@ -26,5 +26,14 @@ namespace BlazorEcommerce.Server.Controllers
 			return Ok(result);
 
 		}
- }
-	}
+
+        [HttpGet("{productId}")]
+        //public async Task<IActionResult> GetProduct() this will only give database for controller weather
+        public async Task<ActionResult<ServiceResponse<Product>>> GetProduct(int productId)
+        {
+            var result = await _productService.GetProductAsync(productId);
+            return Ok(result);
+
+        }
+    }
+}

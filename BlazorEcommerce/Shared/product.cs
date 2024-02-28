@@ -18,5 +18,9 @@ namespace BlazorEcommerce.Shared
 		[Column(TypeName="decimal(18,2)")]//define digits for model
 
 		public decimal Price { get; set; }
+
+		public Category? Category { get; set; }
+
+		public int CategoryId { get; set; }
 	}
 }
