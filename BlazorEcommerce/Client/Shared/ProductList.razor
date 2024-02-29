@@ -1,5 +1,6 @@
-﻿@using BlazorEcommerce.Client.Services
+﻿@using BlazorEcommerce.Shared
 @inject IProductService ProductService
+@implements IDisposable
 
 @if (ProductService.Products == null || ProductService.Products.Count == 0)
 {
@@ -32,8 +33,12 @@ else
 @code
 {
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        await ProductService.GetProducts();
+        ProductService.ProductsChanged += StateHasChanged;
+    }
+    public void Dispose()
+    {
+        ProductService.ProductsChanged -= StateHasChanged;
     }
 }

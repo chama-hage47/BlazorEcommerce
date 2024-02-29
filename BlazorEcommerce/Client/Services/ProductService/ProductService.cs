@@ -16,30 +16,36 @@ namespace BlazorEcommerce.Client.Services.ProductService
 		{ _http = http; }
 		public List<Product> Products { get; set; } = new List<Product>();
 
+        public event Action ProductsChanged;
+
         public async Task<ServiceResponse<Product>> GetProduct(int productId)
         {
 			var result = await _http.GetFromJsonAsync<ServiceResponse<Product>>($"api/product/{productId}");
 			return result;
         }
 
-        //public int Service { get; private set; }
+		//public int Service { get; private set; }
 
-       /* public async Task GetProducts()
-		{
-			var result = 
-			  await _http.GetFromJsonAsync<ServiceResponse<List<Product>>>("api/product");
-			if (result != null && result.Data != null)
-				Products = result.Data;
-		}*/
+		/* public async Task GetProducts()
+		 {
+			 var result = 
+			   await _http.GetFromJsonAsync<ServiceResponse<List<Product>>>("api/product");
+			 if (result != null && result.Data != null)
+				 Products = result.Data;
+		 }*/
 
-	 public async Task<ServiceResponse<List<Product>>> GetProducts()
+		public async Task GetProducts(string? categoryUrl = null)
 		{
 			//throw new NotImplementedException();
-			var result =
-			  await _http.GetFromJsonAsync<ServiceResponse<List<Product>>>("api/product");
-			if (result != null && result.Data != null)
+			var result = categoryUrl == null ?
+			  await _http.GetFromJsonAsync<ServiceResponse<List<Product>>>("api/product") :
+			  await _http.GetFromJsonAsync<ServiceResponse<List<Product>>>($"api/product/category/{categoryUrl}");
+
+            if (result != null && result.Data != null)
 				Products = result.Data;
-			return result;
+
+			ProductsChanged.Invoke();
+			//return result;
 		}
 	}
 }

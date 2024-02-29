@@ -2,6 +2,7 @@ global using BlazorEcommerce.Shared;//this is needed for ProductController.cs
 global using Microsoft.AspNetCore.ResponseCompression;
 global using BlazorEcommerce.Server.Data;
 global using BlazorEcommerce.Server.Services.ProductService;
+global using BlazorEcommerce.Server.Services.CategoryService;
 global using Microsoft.EntityFrameworkCore;
 //using Microsoft.AspNetCore.ResponseCompression;
 
@@ -23,6 +24,7 @@ namespace BlazorEcommerce
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
 			builder.Services.AddScoped<IProductService, ProductService>();
+			builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 			var app = builder.Build();
 			app.UseSwaggerUI();
